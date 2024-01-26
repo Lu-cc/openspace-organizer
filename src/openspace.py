@@ -27,23 +27,21 @@ class OpenSpace():
         not_seated = []
         # This method will randomly assign people to the seat objects at the different table objects.
         for table in self.tables:
-            #If there are no more names to assign, it will break out of the loop.
-            if not names:
-                print("No more people to be seated!")
-                break
-            
             for name in list(names):
                 if table.has_free_spot():  # Check if the table has free spots
                     table.assign_seat(name)  # Assign a seat to the person
-                    seated.append(name)
-                    names.remove(name)# Remove the assigned person from the list
+                    seated.append(name)      #Adds a name to 
+                    names.remove(name)  # Remove the assigned person from the list of names
                     if len(seated)==len(names):
                         break
                 else:
                     not_seated.append(name)
+                    break
                     
-        for name in not_seated:
-            print(f"{name} could not be seated!")       
+        if not_seated:
+            print("The following individuals could not be seated:")
+            for name in not_seated:
+                print(name)      
                              
     def display(self):
         """Displays the order of the seating. 
